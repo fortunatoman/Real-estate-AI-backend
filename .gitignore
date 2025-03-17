@@ -1,0 +1,4 @@
+# Updated 2026-02-23
+node_modules
+.env
+test

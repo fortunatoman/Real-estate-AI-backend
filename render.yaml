@@ -1,0 +1,32 @@
+services:
+  - type: web
+    name: real-estate-ai-backend
+    env: node
+    plan: starter
+    buildCommand: npm install && npm run postinstall
+    startCommand: npm start
+    envVars:
+      - key: NODE_ENV
+        value: production
+      - key: PUPPETEER_SKIP_CHROMIUM_DOWNLOAD
+        value: false
+      - key: PUPPETEER_CACHE_DIR
+        value: /opt/render/.cache/puppeteer
+      - key: OPENAI_API_KEY
+        value: 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
+      - key: GOOGLE_API_KEY
+        value: AIzaSyBCZJeqfa8NBEzBdXz1cj7FDvBk0tLtRYo
+      - key: GOOGLE_CSE_ID
+        value: d30c960aad0584fb2
+      - key: RAPIDAPI_API_KEY
+        value: 2e5dd68fe7mshd661c7de69087c4p153130jsn820b372673ae
+      - key: JWT_SECRET
+        value: your_jwt_secret_here
+      - key: SUPABASE_URL
+        value: https://rjzjnuomutyhgburfmmj.supabase.co
+      - key: SUPABASE_ANON_KEY
+        value: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InJqempudW9tdXR5aGdidXJmbW1qIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NTMyMzA1NDAsImV4cCI6MjA2ODgwNjU0MH0.oFckrce4lGqLNNmrrCnqkTbPAIvhFAkgM9gXAxWrZ14
+    disk:
+      name: cache
+      mountPath: /opt/render/.cache
+      sizeGB: 1 

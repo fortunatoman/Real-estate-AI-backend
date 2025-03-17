@@ -1,0 +1,414 @@
+import { openai } from './openai';
+import { analyseZillowData } from '../utils/analyseZilllowData';
+
+export const queryQuestion = async (userInput: string) => {
+  const systemPrompt = `
+You are a validation assistant.
+
+If the user's input is an affirmative response such as "yes", "yeah", "ok", "okay", "sure", "yup", or similar (case-insensitive), return:
+- true
+
+If the user's input is an affirmative response such as "No", "no", "nope", "not", "no way", or similar (case-insensitive), return:
+- false
+
+If the user's input is not affirmative or is unrelated, return:
+- null
+
+Respond with one word only: true or false.
+
+Evaluate this user input:
+  ${userInput}
+  `;
+
+  try {
+    const completion = await openai.chat.completions.create({
+      model: 'gpt-4o-mini',
+      messages: [
+        { role: 'user', content: systemPrompt }
+      ],
+      temperature: 0
+    });
+    let question = completion.choices[0].message.content?.trim();
+    return question;
+  } catch (error) {
+    console.error('Error analyzing assistant:', error);
+    return null;
+  }
+}
+
+export const classifyQuestion = async (userInput: string) => {
+  const systemPrompt = `
+You are a real estate assistant. Classify the user's question into one of the following categories:
+
+- listing: if the question asks to search for or find specific properties based on criteria such as price, location, or features.
+
+- analysis: if the question asks about market trends, predictions, macroeconomic factors, or overall summaries.
+
+Respond with only one word: listing or analysis.
+  `;
+
+  try {
+    const completion = await openai.chat.completions.create({
+      model: 'gpt-4o-mini',
+      messages: [
+        { role: 'system', content: systemPrompt },
+        { role: 'user', content: userInput }
+      ],
+      temperature: 0
+    });
+
+    return completion.choices[0].message.content?.trim();
+  } catch (error) {
+    console.error('Error analyzing assistant:', error);
+    return null;
+  }
+}
+
+export const extractSearchQuery = async (userInput: string) => {
+  const systemPrompt = `
+You are a real estate AI assistant that generates Zillow-compatible searchQueryState JSON objects for property search URLs.
+Your task is to analyze natural language property search queries and convert them into a strict, valid Zillow searchQueryState JSON object. Your output must follow the exact schema format shown below and reflect only the filters explicitly described in the user's request.
+
+🧠 Responsibilities:
+- Understand and interpret the natural language request
+- Convert it into a structured JSON for Zillow search
+- Strictly exclude nearby cities or neighboring areas unless specified
+- Only include filters that are explicitly mentioned
+- Ensure the JSON is syntactically and structurally valid
+
+✅ Output JSON Schema Template:
+{
+  "city": string,
+  "state": string,
+  "usersSearchTerm": string,
+  "mapBounds": {
+    "north": number,
+    "south": number,
+    "east": number,
+    "west": number
+  },
+  "filterState": {
+    "sort": { "value": string },
+    "price": {
+      "min": number,
+      "max": number
+    },
+    "beds": {
+      "min": number,
+      "max": number
+    },
+    "baths": {
+      "min": number,
+      "max": number
+    },
+   "mf": {
+      "value": boolean
+    },
+    "con": {
+      "value": boolean
+    },
+    "apa": {
+      "value": boolean
+    },
+    "apco": {
+      "value": boolean
+    },
+    "pool": {
+      "value": boolean
+    }
+  },
+  "isMapVisible": boolean,
+  "isListVisible": boolean,
+  "mapZoom": number,
+  "regionSelection": [
+    {
+      "regionId": number,
+      "regionType": number
+    }
+  ],
+  "schoolId": number
+}
+
+🧾 Example 1 Natural Language Query:
+"Find me 3-bedroom, 2-bath single-family homes in Austin, TX under $350K."
+
+{
+  "city": "Austin",
+  "state": "TX",
+  "usersSearchTerm": "Austin, TX",
+  "mapBounds": {
+    "north": 30.51,
+    "south": 30.16,
+    "east": -97.58,
+    "west": -97.94
+  },
+  "filterState": {
+    "sort": { "value": "globalrelevanceex" },
+    "price": {
+      "min": null,
+      "max": 350000
+    },
+    "beds": {
+      "min": 3,
+      "max": null
+    },
+    "baths": {
+      "min": 2,
+      "max": null
+    },
+   "mf": {
+      "value": false
+    },
+    "con": {
+      "value": false
+    },
+    "apa": {
+      "value": false
+    },
+    "apco": {
+      "value": false
+    },
+    "pool": {
+      "value": true
+    }
+  },
+  "isMapVisible": true,
+  "isListVisible": true,
+  "mapZoom": 11,
+  "regionSelection": [
+    {
+      "regionId": 0,
+      "regionType": 2
+    }
+  ],
+  "schoolId": null
+}
+
+🧾 Example 2 Natural Language Query:
+"What is the median and average home value in Arizona?"
+
+
+{
+  "city": "",
+  "state": "AZ",
+  "usersSearchTerm": "Arizona, AZ",
+  "mapBounds": {
+    "north": 37.00426,
+    "south": 31.332177,
+    "east": -109.045223,
+    "west": -114.818269
+  },
+}
+
+
+⚠️ Output Rules:
+- If the city, state and users Search Term is not found, you have to return the empty string (e.g."mapBounds": null).
+- If you needn't any value, you have to remove that key and value.
+- You mustn't change the structure of the schema.
+- You mustn't add any new key and value as your mind.
+- This schema is a **template only**. You must modify its content based on each new user request.
+- Do not include values from the template if they’re not explicitly required (e.g., lot size, year built).
+- Do not include filters unless specifically mentioned.
+- Set values like null only when necessary (e.g., price.min).
+- Only return valid JSON, with no explanations or additional content.
+- Do not include nearby areas—respect city boundaries only.
+- Use appropriate map bounds for the target city based on real coordinates.
+- Ensure all data types and nesting are correct.
+- If there aren't the data that match, you have to return the similar data that match the user input.
+- If the value can't be found, you have to return the similar data that match the user input.
+
+📌 Reminder:
+Your output must reflect the user's specific request, but maintain the exact structure and naming style of the provided template.
+You must ONLY return the JSON output based on the analyzed user input.
+`;
+
+  try {
+    const completion = await openai.chat.completions.create({
+      model: 'gpt-4o-mini',
+      messages: [
+        { role: 'system', content: systemPrompt },
+        { role: 'user', content: userInput }
+      ],
+      temperature: 0
+    });
+
+    return completion.choices[0].message.content?.trim();
+  } catch (error) {
+    console.error('Error extracting search query:', error);
+    return null;
+  }
+};
+
+export const analysisAI = async (userInput: string, results: any, basicData: any) => {
+  const systemPrompt = `
+ 
+`;
+
+  try {
+    const completion = await openai.chat.completions.create({
+      model: 'gpt-4o-mini',
+      messages: [
+        { role: 'user', content: systemPrompt }
+      ],
+      temperature: 0
+    });
+    let description = completion.choices[0].message.content?.trim();
+    let descriptionCleaned = description?.replace(/```json | ```/g, '');
+    return descriptionCleaned;
+  } catch (error) {
+    console.error('Error analyzing assistant:', error);
+    return null;
+  }
+}
+
+export const analysisReport = async (data: any) => {
+  const analyseData = await analyseZillowData(data);
+
+  let taxData: any = null;
+  const formData = new FormData();
+  formData.append('ud-current-location', `CITY|${data.city}|${data.state}`);
+  const getTaxData = async () => {
+    const response = await fetch(`https://smartasset.com/taxes/property-taxes?render=json`, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: formData
+    });
+    const data = await response.json();
+    taxData = data;
+  }
+  await getTaxData();
+  const prompt = `
+You are a comprehensive real estate analysis expert. Generate a detailed property report based on the following REAL property data:
+
+Property Information:
+${JSON.stringify(analyseData, null, 2)}
+
+City Tax Data (from authoritative tax API):
+${JSON.stringify(taxData.page_data, null, 2)}
+
+CRITICAL INSTRUCTIONS - USE ONLY REAL DATA:
+- You MUST use ONLY the actual property data and tax data provided in the JSON above
+- DO NOT create fictional properties like "Property A", "Property B", "Property C"
+- DO NOT invent addresses, prices, property details, or tax values
+- If the data contains an array of properties/results, use the ACTUAL addresses and details from that array
+- For comparable properties, use the real property listings from the data provided
+- All addresses, prices, bedrooms, bathrooms, square footage, and property tax values MUST come from the actual data
+- For tax information, use the actual tax rates, effective rates, and tax-related data directly from the City Tax Data JSON. Do NOT perform calculations - use the tax data as provided in the API response.
+
+Please provide a professional property analysis report that includes:
+
+1. **Property Overview**
+   - Use the ACTUAL property address and details from the data
+   - Property type (single-family, multifamily, commercial, mixed-use, land, etc.) and key features from the real data
+   - Lot size, zoning restrictions, garage, pool, and other notable features if available in the data
+   - Suitability for investment strategies: fix & flip, buy & hold, short-term rental, ground-up construction, etc.
+   - Layout and flow—comment on the layout and flow of the property and its appeal to renters or buyers, based on the available data or description. If not available, explain why this is important for investment decisions.
+   - Current listing price from the actual data
+   - Indicate whether the property is listed under or above market value, based on the available data. If not available, explain why this is important for investment decisions.
+   - After-Repair Value (ARV)—estimate the ARV if renovation is considered, using available data or comps. If not available, explain why ARV is important for investment decisions.
+
+2. **Renovations & Deferred Maintenance**
+   - Review the property description (${analyseData.description}) for keywords such as "renovations", "improvements", or similar. If found, summarize the relevant details about recent renovations or improvements.
+   - If no such keywords or details are found in ${analyseData.description}, inform the user that no information about recent renovations or improvements is available, and explain why knowing about them is important for investment decisions.
+   - For deferred maintenance, advise the user to obtain a professional appraisal to identify any deferred maintenance issues, and explain why this is important for assessing the property's true condition and investment risk.
+   - Only display information that exists in the provided data; do not invent or assume details.
+
+3. **Inspection Reports (Foundation, Pests, Mold, etc.)**
+   - Review the property facts (${JSON.stringify(analyseData.resoFacts)}) for any available inspection report data (foundation, pests, mold, etc.). Summarize the relevant details if found.
+   - If no explicit inspection report data is found, analyze the available data in ${JSON.stringify(analyseData.resoFacts)} and display any relevant findings, even if not labeled as an inspection report.
+   - If nothing relevant is found, inform the user and explain why inspection reports are important for investment decisions.
+   - Only display information that exists in the provided data; do not invent or assume details.
+
+4. **Market Analysis**
+   - Comparable Properties in the Area: List at least 3 comparable properties from the data with their REAL addresses
+   - If fewer than 3 properties are available in the data, use all available properties and note the limited sample size
+   - Format each as: "[REAL ADDRESS]: [actual beds] beds, [actual baths] baths, [actual sq ft] sq ft, Listed at [actual price]"
+   - Price per square foot analysis using the real property data
+   - Local market trends based on the provided data (crime rate, walkability, school ratings, amenities, gentrification or decline, new developments or infrastructure)
+   - Gentrification or decline? New developments or infrastructure?
+   - Comparative analysis showing how the subject property compares to these comps
+   - Sales comps over past 6–12 months and expected appreciation rate in this zip code or metro area
+   - Expected appreciation rate in this zip code or metro area.
+   - Are employers moving in or out?
+   - Population growth or decline?
+
+5. **Financial Analysis**
+   - Use ACTUAL property prices from the data for calculations
+   - Estimated monthly mortgage payment (assuming 20% down)
+   - Property tax information: You MUST use the actual property tax data provided in the 'City Tax Data' JSON above. Use the tax rates, effective rates, and any other tax-related information directly from the API data. Do NOT calculate or estimate tax values—use only the real API data provided as-is.
+   - Insurance, utilities, HOA fees, maintenance costs
+   - Market rent for comparable units (Rent comps).
+   - Occupancy rates in the area.
+   - Seasonal or vacation rental income potential.
+   - Potential rental income analysis (market rent for comparable units, occupancy rates, seasonal/vacation rental income potential)
+   - Investment ROI calculations (monthly cash flow, cap rate, cash-on-cash return, IRR for longer-term)
+
+6. **Location Analysis**
+   - Neighborhood characteristics based on the actual location data
+   - School district information: Include the source name (e.g., "GreatSchools", "SchoolDigger") and specify the rating scale (e.g., "5 out of 5" or "5 out of 10") for any school ratings mentioned
+   - Nearby amenities and transportation
+   - Local economy and job market (major employers, population growth or decline)
+
+7. **Risk Assessment**
+   - Market volatility factors
+   - Potential appreciation or depreciation risks
+   - Recommended holding period
+   - Flood zone or natural hazard areas?
+   - Economic risks (interest rate spikes, job loss in area)?
+   - Regulatory risks (rent control, eviction laws)?
+
+8. **Investment Recommendation**
+   - Buy/Hold/Avoid recommendation with reasoning
+   - Target purchase price range based on actual market data
+   - Exit strategy suggestions (resale potential, likely buyer types)
+   - Any liens, encroachments, or disputes?
+   - Clean title and insurable?
+   - Zoning & permits (conversion, redevelopment, or expansion potential; short-term rental allowance)
+   - Can the property be converted, redeveloped, or expanded?
+   - Are short-term rentals allowed?
+   - Exit Options: Can you sell it quickly if needed? Who’s your buyer?
+   - Tenants & lease status if occupied (current lease terms, security deposits, rent rolls, month-to-month or long-term)
+
+Make sure to OMIT any sections, bullet points, or data fields for which there is no real data available. Only display information that exists in the provided property and tax data. Do not display placeholders, empty fields, or mention unavailable data.
+
+CRITICAL FORMATTING REQUIREMENTS:
+- Use ONLY the real property and tax data provided - NO fictional data
+- For comparable properties, use the exact addresses and details from the data
+- DO NOT create "Property A/B/C" - use real street addresses
+- Return ONLY clean HTML content without any markdown code blocks
+- Do NOT include \`\`\`html or \`\`\` markers
+- Use proper HTML tags: <h2>, <h3>, <p>, <ul>, <li>, <table>, etc.
+- Include tables for financial calculations where appropriate
+- Make the content ready to be directly inserted into a PDF template
+- Do NOT include any <html>, <body>, or <head> tags
+- Start directly with content tags like <h2>Property Overview</h2>
+- Do Not include any images, videos, or other media in the report
+
+Make the analysis data-driven, professional, and actionable for real estate investors using ONLY the real property and tax data provided.
+`;
+
+  try {
+    const completion = await openai.chat.completions.create({
+      model: "gpt-4o-mini",
+      messages: [
+        { role: 'user', content: prompt }
+      ],
+      temperature: 0
+    })
+    let question = completion.choices[0].message.content?.trim();
+
+    // Clean up any remaining markdown code blocks
+    if (question) {
+      question = question.replace(/```html\s*/g, '');
+      question = question.replace(/```\s*/g, '');
+      question = question.trim();
+    }
+
+    return question;
+  } catch (error) {
+    console.error("Error analyzing report: ", error);
+    return null;
+  }
+}
