@@ -1891,6 +1891,10 @@
     {
       "date": "2025-03-17T12:15:00",
       "message": "chore: set up environment variable templates (.env.example)"
+    },
+    {
+      "date": "2025-03-17T12:15:00",
+      "message": "chore: add CONTRIBUTING.md with development guidelines"
     }
   ],
   "last_commit_date": "2025-03-17T12:15:00"
