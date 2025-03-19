@@ -2051,6 +2051,10 @@
     {
       "date": "2025-03-19T09:47:00",
       "message": "chore: add Swagger/OpenAPI documentation setup"
+    },
+    {
+      "date": "2025-03-19T09:47:00",
+      "message": "chore: configure Jest for unit and integration testing"
     }
   ],
   "last_commit_date": "2025-03-19T09:47:00"
