@@ -2095,6 +2095,10 @@
     {
       "date": "2025-03-20T17:32:00",
       "message": "chore: add Python-Jose for JWT token handling"
+    },
+    {
+      "date": "2025-03-20T17:32:00",
+      "message": "chore: configure Passlib for password hashing"
     }
   ],
   "last_commit_date": "2025-03-20T17:32:00"
