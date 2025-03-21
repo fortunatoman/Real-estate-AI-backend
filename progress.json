@@ -2119,6 +2119,10 @@
     {
       "date": "2025-03-21T11:53:00",
       "message": "chore: add pre-commit with black, isort, and flake8"
+    },
+    {
+      "date": "2025-03-21T11:53:00",
+      "message": "chore: configure mypy for static type checking"
     }
   ],
   "last_commit_date": "2025-03-21T11:53:00"
