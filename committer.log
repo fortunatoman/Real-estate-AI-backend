@@ -2690,3 +2690,7 @@
 2026-02-23 22:33:30,114 - INFO - [OK] Commit created: feat: add tags table with many-to-many product relation
 2026-02-23 22:33:32,490 - INFO - Pushed to GitHub: master
 2026-02-23 22:33:33,493 - INFO - Modified 4 files
+2026-02-23 22:33:34,252 - INFO - Created commit: feat: create coupons table with usage tracking...
+2026-02-23 22:33:34,255 - INFO - [OK] Commit created: feat: create coupons table with usage tracking
+2026-02-23 22:33:36,651 - INFO - Pushed to GitHub: master
+2026-02-23 22:33:37,654 - INFO - Modified 4 files
