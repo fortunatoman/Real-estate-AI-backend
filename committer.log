@@ -2666,3 +2666,7 @@
 2026-02-23 22:33:05,551 - INFO - [OK] Commit created: feat: add addresses table linked to users
 2026-02-23 22:33:07,980 - INFO - Pushed to GitHub: master
 2026-02-23 22:33:08,982 - INFO - Modified 4 files
+2026-02-23 22:33:09,590 - INFO - Created commit: feat: create reviews table with rating constraints...
+2026-02-23 22:33:09,593 - INFO - [OK] Commit created: feat: create reviews table with rating constraints
+2026-02-23 22:33:11,977 - INFO - Pushed to GitHub: master
+2026-02-23 22:33:12,983 - INFO - Modified 4 files
