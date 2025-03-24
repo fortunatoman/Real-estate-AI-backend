@@ -2311,6 +2311,10 @@
     {
       "date": "2025-03-24T17:25:00",
       "message": "feat: add account lockout after failed login attempts"
+    },
+    {
+      "date": "2025-03-24T17:25:00",
+      "message": "feat: implement session management with device tracking"
     }
   ],
   "last_commit_date": "2025-03-24T17:25:00"
