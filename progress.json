@@ -2391,6 +2391,10 @@
     {
       "date": "2025-03-25T11:03:00",
       "message": "feat(frontend/users): build user profile page"
+    },
+    {
+      "date": "2025-03-25T11:03:00",
+      "message": "feat(frontend/users): add profile edit form with avatar upload"
     }
   ],
   "last_commit_date": "2025-03-25T11:03:00"
