@@ -2323,6 +2323,10 @@
     {
       "date": "2025-03-24T17:25:00",
       "message": "feat: implement password strength validation"
+    },
+    {
+      "date": "2025-03-24T17:25:00",
+      "message": "feat: add magic link (passwordless) login"
     }
   ],
   "last_commit_date": "2025-03-24T17:25:00"
