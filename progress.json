@@ -2443,6 +2443,10 @@
     {
       "date": "2025-03-26T10:54:00",
       "message": "feat: implement product image reordering"
+    },
+    {
+      "date": "2025-03-26T10:54:00",
+      "message": "feat: add product variants (size, color, etc.)"
     }
   ],
   "last_commit_date": "2025-03-26T10:54:00"
