@@ -2487,6 +2487,10 @@
     {
       "date": "2025-03-26T10:54:00",
       "message": "feat(frontend/products): add product image gallery with zoom"
+    },
+    {
+      "date": "2025-03-26T10:54:00",
+      "message": "feat(frontend/products): implement product variant selector"
     }
   ],
   "last_commit_date": "2025-03-26T10:54:00"
