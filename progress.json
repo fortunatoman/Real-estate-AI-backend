@@ -2659,6 +2659,10 @@
     {
       "date": "2025-03-31T14:27:00",
       "message": "feat(frontend/orders): create order history page"
+    },
+    {
+      "date": "2025-03-31T14:27:00",
+      "message": "feat(frontend/orders): add order detail page with timeline"
     }
   ],
   "last_commit_date": "2025-03-31T14:27:00"
