@@ -2627,6 +2627,10 @@
     {
       "date": "2025-03-31T14:27:00",
       "message": "feat(orders): add cancel order endpoint with refund trigger"
+    },
+    {
+      "date": "2025-03-31T14:27:00",
+      "message": "feat(orders): implement order status update by admin"
     }
   ],
   "last_commit_date": "2025-03-31T14:27:00"
