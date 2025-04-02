@@ -2759,6 +2759,10 @@
     {
       "date": "2025-04-02T10:01:00",
       "message": "feat(frontend/reviews): build review list component"
+    },
+    {
+      "date": "2025-04-02T10:01:00",
+      "message": "feat(frontend/reviews): add review form with star rating"
     }
   ],
   "last_commit_date": "2025-04-02T10:01:00"
