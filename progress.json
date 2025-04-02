@@ -2719,6 +2719,10 @@
     {
       "date": "2025-04-02T10:01:00",
       "message": "feat(frontend/payments): integrate Stripe Elements"
+    },
+    {
+      "date": "2025-04-02T10:01:00",
+      "message": "feat(frontend/payments): add order summary on checkout page"
     }
   ],
   "last_commit_date": "2025-04-02T10:01:00"
