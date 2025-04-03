@@ -2807,6 +2807,10 @@
     {
       "date": "2025-04-03T13:19:00",
       "message": "feat(frontend/notifications): add notification dropdown panel"
+    },
+    {
+      "date": "2025-04-03T13:19:00",
+      "message": "feat(frontend/notifications): create notifications settings page"
     }
   ],
   "last_commit_date": "2025-04-03T13:19:00"
