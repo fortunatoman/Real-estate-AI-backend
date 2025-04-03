@@ -2855,6 +2855,10 @@
     {
       "date": "2025-04-03T13:19:00",
       "message": "feat(search): implement global search endpoint"
+    },
+    {
+      "date": "2025-04-03T13:19:00",
+      "message": "feat(search): add Elasticsearch integration for advanced search"
     }
   ],
   "last_commit_date": "2025-04-03T13:19:00"
