@@ -2783,7 +2783,11 @@
     {
       "date": "2025-04-02T10:01:00",
       "message": "feat(notifications): add mark all notifications as read"
+    },
+    {
+      "date": "2025-04-03T13:19:00",
+      "message": "feat(notifications): implement real-time notifications via WebSocket"
     }
   ],
-  "last_commit_date": "2025-04-02T10:01:00"
+  "last_commit_date": "2025-04-03T13:19:00"
 }
