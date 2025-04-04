@@ -2887,6 +2887,10 @@
     {
       "date": "2025-04-04T10:33:00",
       "message": "feat(frontend/search): implement recent searches history"
+    },
+    {
+      "date": "2025-04-04T10:33:00",
+      "message": "feat(admin): build admin dashboard layout with sidebar navigation"
     }
   ],
   "last_commit_date": "2025-04-04T10:33:00"
