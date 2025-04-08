@@ -2931,6 +2931,10 @@
     {
       "date": "2025-04-08T16:29:00",
       "message": "feat(admin): add admin settings management page"
+    },
+    {
+      "date": "2025-04-08T16:29:00",
+      "message": "feat(admin): implement role and permission management UI"
     }
   ],
   "last_commit_date": "2025-04-08T16:29:00"
