@@ -2915,6 +2915,10 @@
     {
       "date": "2025-04-08T16:29:00",
       "message": "feat(admin): add low stock alerts table"
+    },
+    {
+      "date": "2025-04-08T16:29:00",
+      "message": "feat(admin): implement activity log viewer"
     }
   ],
   "last_commit_date": "2025-04-08T16:29:00"
