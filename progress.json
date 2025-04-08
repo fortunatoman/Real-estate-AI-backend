@@ -2907,6 +2907,10 @@
     {
       "date": "2025-04-08T16:29:00",
       "message": "feat(admin): add new users registration trend chart"
+    },
+    {
+      "date": "2025-04-08T16:29:00",
+      "message": "feat(admin): implement recent orders widget"
     }
   ],
   "last_commit_date": "2025-04-08T16:29:00"
