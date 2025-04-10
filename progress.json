@@ -3023,6 +3023,10 @@
     {
       "date": "2025-04-10T15:49:00",
       "message": "feat(ui): add Tabs component with keyboard navigation"
+    },
+    {
+      "date": "2025-04-10T15:49:00",
+      "message": "feat(ui): implement Accordion/Collapsible component"
     }
   ],
   "last_commit_date": "2025-04-10T15:49:00"
