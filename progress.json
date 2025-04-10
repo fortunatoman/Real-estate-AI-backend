@@ -2963,6 +2963,10 @@
     {
       "date": "2025-04-10T15:49:00",
       "message": "docs(api): add authentication guide to API documentation"
+    },
+    {
+      "date": "2025-04-10T15:49:00",
+      "message": "docs(api): implement Redoc for alternative API docs UI"
     }
   ],
   "last_commit_date": "2025-04-10T15:49:00"
