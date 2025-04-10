@@ -3011,6 +3011,10 @@
     {
       "date": "2025-04-10T15:49:00",
       "message": "feat(ui): add Skeleton loading placeholder component"
+    },
+    {
+      "date": "2025-04-10T15:49:00",
+      "message": "feat(ui): implement Avatar component with fallback initials"
     }
   ],
   "last_commit_date": "2025-04-10T15:49:00"
