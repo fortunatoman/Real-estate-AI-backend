@@ -2999,6 +2999,10 @@
     {
       "date": "2025-04-10T15:49:00",
       "message": "feat(ui): add Badge component for status indicators"
+    },
+    {
+      "date": "2025-04-10T15:49:00",
+      "message": "feat(ui): implement Breadcrumb navigation component"
     }
   ],
   "last_commit_date": "2025-04-10T15:49:00"
