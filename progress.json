@@ -2975,6 +2975,10 @@
     {
       "date": "2025-04-10T15:49:00",
       "message": "feat(ui): add Input component with validation states"
+    },
+    {
+      "date": "2025-04-10T15:49:00",
+      "message": "feat(ui): implement Modal component with backdrop and animation"
     }
   ],
   "last_commit_date": "2025-04-10T15:49:00"
