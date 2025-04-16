@@ -3179,6 +3179,10 @@
     {
       "date": "2025-04-16T10:41:00",
       "message": "perf: add image lazy loading with Intersection Observer"
+    },
+    {
+      "date": "2025-04-16T10:41:00",
+      "message": "perf: optimize bundle size with tree shaking"
     }
   ],
   "last_commit_date": "2025-04-16T10:41:00"
