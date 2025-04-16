@@ -3175,6 +3175,10 @@
     {
       "date": "2025-04-16T10:41:00",
       "message": "perf: implement virtual scrolling for large lists"
+    },
+    {
+      "date": "2025-04-16T10:41:00",
+      "message": "perf: add image lazy loading with Intersection Observer"
     }
   ],
   "last_commit_date": "2025-04-16T10:41:00"
