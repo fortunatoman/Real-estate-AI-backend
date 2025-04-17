@@ -3231,6 +3231,10 @@
     {
       "date": "2025-04-17T12:02:00",
       "message": "security: add Content Security Policy headers"
+    },
+    {
+      "date": "2025-04-17T12:02:00",
+      "message": "security: implement secure cookie flags (HttpOnly, Secure, SameSite)"
     }
   ],
   "last_commit_date": "2025-04-17T12:02:00"
