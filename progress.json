@@ -3219,6 +3219,10 @@
     {
       "date": "2025-04-16T10:41:00",
       "message": "security: implement input sanitization to prevent XSS"
+    },
+    {
+      "date": "2025-04-16T10:41:00",
+      "message": "security: add CSRF protection with double-submit cookie pattern"
     }
   ],
   "last_commit_date": "2025-04-16T10:41:00"
