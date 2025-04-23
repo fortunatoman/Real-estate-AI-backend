@@ -3307,6 +3307,10 @@
     {
       "date": "2025-04-22T10:44:00",
       "message": "test: add mock server with MSW for frontend tests"
+    },
+    {
+      "date": "2025-04-22T10:44:00",
+      "message": "test: achieve 80% code coverage threshold"
     }
   ],
   "last_commit_date": "2025-04-22T10:44:00"
