@@ -3375,6 +3375,10 @@
     {
       "date": "2025-04-23T17:42:00",
       "message": "ci: add infrastructure as code deployment with Terraform"
+    },
+    {
+      "date": "2025-04-23T17:42:00",
+      "message": "infra: create Terraform modules for AWS infrastructure"
     }
   ],
   "last_commit_date": "2025-04-23T17:42:00"
