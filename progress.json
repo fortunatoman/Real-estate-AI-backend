@@ -3515,6 +3515,10 @@
     {
       "date": "2025-04-29T16:03:00",
       "message": "feat(email): add unsubscribe link and preference management"
+    },
+    {
+      "date": "2025-04-29T16:03:00",
+      "message": "feat(email): integrate SendGrid for transactional emails"
     }
   ],
   "last_commit_date": "2025-04-29T16:03:00"
