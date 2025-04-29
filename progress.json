@@ -3619,6 +3619,10 @@
     {
       "date": "2025-04-29T16:03:00",
       "message": "a11y: add screen reader announcements for dynamic content"
+    },
+    {
+      "date": "2025-04-29T16:03:00",
+      "message": "a11y: implement reduced-motion media query support"
     }
   ],
   "last_commit_date": "2025-04-29T16:03:00"
