@@ -3551,6 +3551,10 @@
     {
       "date": "2025-04-29T16:03:00",
       "message": "feat(realtime): add WebSocket authentication middleware"
+    },
+    {
+      "date": "2025-04-29T16:03:00",
+      "message": "feat(realtime): implement rooms for scoped notifications"
     }
   ],
   "last_commit_date": "2025-04-29T16:03:00"
