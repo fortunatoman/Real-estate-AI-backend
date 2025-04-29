@@ -3575,6 +3575,10 @@
     {
       "date": "2025-04-29T16:03:00",
       "message": "feat(i18n): add French (fr) translation"
+    },
+    {
+      "date": "2025-04-29T16:03:00",
+      "message": "feat(i18n): implement language switcher component"
     }
   ],
   "last_commit_date": "2025-04-29T16:03:00"
