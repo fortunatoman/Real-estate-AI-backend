@@ -3571,6 +3571,10 @@
     {
       "date": "2025-04-29T16:03:00",
       "message": "feat(i18n): add Spanish (es) translation"
+    },
+    {
+      "date": "2025-04-29T16:03:00",
+      "message": "feat(i18n): add French (fr) translation"
     }
   ],
   "last_commit_date": "2025-04-29T16:03:00"
