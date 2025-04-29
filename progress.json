@@ -3511,6 +3511,10 @@
     {
       "date": "2025-04-29T16:03:00",
       "message": "feat(email): implement weekly digest email"
+    },
+    {
+      "date": "2025-04-29T16:03:00",
+      "message": "feat(email): add unsubscribe link and preference management"
     }
   ],
   "last_commit_date": "2025-04-29T16:03:00"
