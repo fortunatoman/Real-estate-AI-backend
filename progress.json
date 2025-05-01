@@ -3703,6 +3703,10 @@
     {
       "date": "2025-04-30T10:23:00",
       "message": "feat(responsive): optimize checkout flow for mobile devices"
+    },
+    {
+      "date": "2025-04-30T10:23:00",
+      "message": "feat(responsive): add touch gestures for product image gallery"
     }
   ],
   "last_commit_date": "2025-04-30T10:23:00"
