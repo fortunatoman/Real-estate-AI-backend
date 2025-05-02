@@ -3763,6 +3763,10 @@
     {
       "date": "2025-05-02T13:45:00",
       "message": "fix(payments): handle Stripe webhook signature verification failure"
+    },
+    {
+      "date": "2025-05-02T13:45:00",
+      "message": "fix: prevent memory leak in long-running job workers"
     }
   ],
   "last_commit_date": "2025-05-02T13:45:00"
