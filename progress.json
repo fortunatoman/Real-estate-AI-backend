@@ -3815,6 +3815,10 @@
     {
       "date": "2025-05-05T14:47:00",
       "message": "fix(cors): allow credentials header in CORS configuration"
+    },
+    {
+      "date": "2025-05-05T14:47:00",
+      "message": "fix(seo): resolve duplicate canonical URL tags"
     }
   ],
   "last_commit_date": "2025-05-05T14:47:00"
