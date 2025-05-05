@@ -3855,6 +3855,10 @@
     {
       "date": "2025-05-05T14:47:00",
       "message": "refactor(api): standardize error response structure across all endpoints"
+    },
+    {
+      "date": "2025-05-05T14:47:00",
+      "message": "refactor(email): extract email template rendering into dedicated service"
     }
   ],
   "last_commit_date": "2025-05-05T14:47:00"

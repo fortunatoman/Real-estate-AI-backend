@@ -4342,3 +4342,7 @@
 2026-02-23 23:02:20,612 - INFO - [OK] Commit created: refactor: consolidate duplicate query patterns into repository layer
 2026-02-23 23:02:23,334 - INFO - Pushed to GitHub: master
 2026-02-23 23:02:24,339 - INFO - Modified 4 files
+2026-02-23 23:02:25,057 - INFO - Created commit: refactor(api): standardize error response structur...
+2026-02-23 23:02:25,062 - INFO - [OK] Commit created: refactor(api): standardize error response structure across all endpoints
+2026-02-23 23:02:27,432 - INFO - Pushed to GitHub: master
+2026-02-23 23:02:28,435 - INFO - Modified 4 files
