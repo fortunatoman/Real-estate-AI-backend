@@ -3819,6 +3819,10 @@
     {
       "date": "2025-05-05T14:47:00",
       "message": "fix(seo): resolve duplicate canonical URL tags"
+    },
+    {
+      "date": "2025-05-05T14:47:00",
+      "message": "fix(realtime): handle disconnect event on server restart"
     }
   ],
   "last_commit_date": "2025-05-05T14:47:00"
