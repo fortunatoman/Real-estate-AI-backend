@@ -3851,6 +3851,10 @@
     {
       "date": "2025-05-05T14:47:00",
       "message": "refactor: consolidate duplicate query patterns into repository layer"
+    },
+    {
+      "date": "2025-05-05T14:47:00",
+      "message": "refactor(api): standardize error response structure across all endpoints"
     }
   ],
   "last_commit_date": "2025-05-05T14:47:00"
