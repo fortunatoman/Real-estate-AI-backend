@@ -3843,6 +3843,10 @@
     {
       "date": "2025-05-05T14:47:00",
       "message": "refactor: move business logic from controller to service layer"
+    },
+    {
+      "date": "2025-05-05T14:47:00",
+      "message": "refactor: replace class components with functional components"
     }
   ],
   "last_commit_date": "2025-05-05T14:47:00"
