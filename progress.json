@@ -3839,6 +3839,10 @@
     {
       "date": "2025-05-05T14:47:00",
       "message": "refactor: extract token service into separate module"
+    },
+    {
+      "date": "2025-05-05T14:47:00",
+      "message": "refactor: move business logic from controller to service layer"
     }
   ],
   "last_commit_date": "2025-05-05T14:47:00"
