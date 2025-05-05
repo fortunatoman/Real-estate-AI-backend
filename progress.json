@@ -3847,6 +3847,10 @@
     {
       "date": "2025-05-05T14:47:00",
       "message": "refactor: replace class components with functional components"
+    },
+    {
+      "date": "2025-05-05T14:47:00",
+      "message": "refactor: consolidate duplicate query patterns into repository layer"
     }
   ],
   "last_commit_date": "2025-05-05T14:47:00"
