@@ -3831,6 +3831,10 @@
     {
       "date": "2025-05-05T14:47:00",
       "message": "fix(stripe): handle declined card error response correctly"
+    },
+    {
+      "date": "2025-05-05T14:47:00",
+      "message": "fix(analytics): prevent tracking events in development mode"
     }
   ],
   "last_commit_date": "2025-05-05T14:47:00"
