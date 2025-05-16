@@ -406,3 +406,20 @@ export const getReport = async (req: Request, res: Response) => {
         res.status(500).json({ error: "Failed to generate report" });
     }
 };
+
+export const getHomeDetails = async (req: Request, res: Response) => {
+    const { address } = req.query;
+    try {
+        const response = await fetch(`https://zillow56.p.rapidapi.com/search_address?address=${address}`, {
+            method: 'GET',
+            headers: {
+                'x-rapidapi-key': "2e5dd68fe7mshd661c7de69087c4p153130jsn820b372673ae",
+                'x-rapidapi-host': 'zillow56.p.rapidapi.com'
+            }
+        });
+        const data = await response.json();
+        res.status(200).json(data.originalPhotos);
+    } catch (error) {
+        res.status(500).json("Get home details error!");
+    }
+};

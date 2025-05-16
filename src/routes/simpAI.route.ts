@@ -1,4 +1,4 @@
-import { analyzeProperty, getStreetView, analyzeFile, getHistories, getHistory, getReport } from '../controllers/simpAI.controller';
+import { analyzeProperty, getStreetView, analyzeFile, getHistories, getHistory, getReport, getHomeDetails } from '../controllers/simpAI.controller';
 import { Router } from 'express';
 import { upload } from '../middleware/upload.middleware';
 
@@ -10,5 +10,6 @@ router.post('/analyze-file', upload.single('file'), analyzeFile);
 router.get('/gethistories', getHistories);
 router.get('/gethistory', getHistory);
 router.post('/get-report', getReport)
+router.get('/get-homeDetails', getHomeDetails)
 
 export default router;
