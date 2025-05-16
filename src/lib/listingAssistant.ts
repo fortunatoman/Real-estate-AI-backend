@@ -9,6 +9,7 @@ export const listingAssistant = async (userInput: string) => {
     const description = await analysisAI(userInput, marketData, basicData);
 
     let lastTitle: string = "";
+
     if (typeof description === "string") {
         const matches = description.match(/[^!]*\!+/g);
         if (matches && matches.length > 0) {
