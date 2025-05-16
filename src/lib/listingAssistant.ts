@@ -17,5 +17,24 @@ export const listingAssistant = async (userInput: string) => {
         }
     }
 
-    return { type: 'listing', description, title: userInput, email: "superman000309@gmail.com", lastTitle, results: basicData };
+    const { bathrooms,
+        bedrooms,
+        imgSrc,
+        livingArea,
+        price,
+        streetAddress,
+        state,
+        zipcode } = basicData;
+    const results = {
+        bathrooms,
+        bedrooms,
+        imgSrc,
+        livingArea,
+        price,
+        streetAddress,
+        state,
+        zipcode
+    }
+
+    return { type: 'listing', description, title: userInput, email: "superman000309@gmail.com", lastTitle, results };
 }
