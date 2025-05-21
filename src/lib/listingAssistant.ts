@@ -27,7 +27,8 @@ export const listingAssistant = async (userInput: string) => {
             streetAddress: item.streetAddress,
             state: item.state,
             city: item.city,
-            zipcode: item.zipcode
+            zipcode: item.zipcode,
+            zillowUrl: `https://www.zillow.com/homedetails/${item.streetAddress}-${item.city}-${item.state}-${item.zipcode}/${item.zpid}_zpid/`
         }
     })
 
