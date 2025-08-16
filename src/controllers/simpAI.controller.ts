@@ -418,7 +418,10 @@ export const getHomeDetails = async (req: Request, res: Response) => {
             }
         });
         const data = await response.json();
-        res.status(200).json(data.originalPhotos);
+        const results = data.originalPhotos.map((item: any) => {
+            return item.mixedSources.jpeg[0].url;
+        })
+        res.status(200).json(results);
     } catch (error) {
         res.status(500).json("Get home details error!");
     }
