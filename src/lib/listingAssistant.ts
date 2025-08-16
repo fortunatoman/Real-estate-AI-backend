@@ -4,12 +4,12 @@ import { getZillow } from "./getZillow";
 
 export const listingAssistant = async (userInput: string) => {
     const basicData = await getZillow(userInput);
-
     const marketData = await getMarket(basicData, userInput);
 
     const description = await analysisAI(userInput, marketData, basicData);
 
     let lastTitle: string = "";
+
     if (typeof description === "string") {
         const matches = description.match(/[^!]*\!+/g);
         if (matches && matches.length > 0) {
@@ -17,24 +17,18 @@ export const listingAssistant = async (userInput: string) => {
         }
     }
 
-    const { bathrooms,
-        bedrooms,
-        imgSrc,
-        livingArea,
-        price,
-        streetAddress,
-        state,
-        zipcode } = basicData;
-    const results = {
-        bathrooms,
-        bedrooms,
-        imgSrc,
-        livingArea,
-        price,
-        streetAddress,
-        state,
-        zipcode
-    }
+    const results = basicData.map((item: any) => {
+        return {
+            bathrooms: item.bathrooms,
+            bedrooms: item.bedrooms,
+            imgSrc: item.imgSrc,
+            livingArea: item.livingArea,
+            price: item.price,
+            streetAddress: item.streetAddress,
+            state: item.state,
+            zipcode: item.zipcode
+        }
+    })
 
     return { type: 'listing', description, title: userInput, email: "superman000309@gmail.com", lastTitle, results };
 }
