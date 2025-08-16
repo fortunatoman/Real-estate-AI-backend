@@ -26,6 +26,7 @@ export const listingAssistant = async (userInput: string) => {
             price: item.price,
             streetAddress: item.streetAddress,
             state: item.state,
+            city: item.city,
             zipcode: item.zipcode
         }
     })
