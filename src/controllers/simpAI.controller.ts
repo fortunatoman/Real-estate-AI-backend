@@ -9,6 +9,8 @@ import pdf from 'pdf-parse';
 import { getData, getOneHistory, saveData, updateData } from '../lib/realEstateData';
 import puppeteer from 'puppeteer';
 import { getDataByAddress } from '../lib/zillow';
+import fs from 'fs';
+import path from 'path';
 
 // For PDF processing, use pdf-parse library
 const extractPdfText = async (buffer: Buffer): Promise<string> => {
@@ -391,15 +393,42 @@ export const getReport = async (req: Request, res: Response) => {
             throw new Error(`PDF generation failed: ${errorMessage}`);
         }
 
-        // Set response headers for PDF download
+        // Save PDF to temporary file
         const fileName = `property-report-${listing.streetAddress?.replace(/\s+/g, '-') || 'property'}-${Date.now()}.pdf`;
+        const tempPdfsDir = path.join(__dirname, '..', '..', 'temp-pdfs');
+        const filePath = path.join(tempPdfsDir, fileName);
 
-        res.setHeader('Content-Type', 'application/pdf');
-        res.setHeader('Content-Disposition', `attachment; filename="${fileName}"`);
-        res.setHeader('Content-Length', pdfBuffer.length);
+        // Ensure directory exists
+        if (!fs.existsSync(tempPdfsDir)) {
+            fs.mkdirSync(tempPdfsDir, { recursive: true });
+        }
 
-        // Send the PDF
-        res.send(pdfBuffer);
+        // Write PDF to file
+        fs.writeFileSync(filePath, pdfBuffer);
+
+        // Create download URL
+        const baseUrl = process.env.BASE_URL || `http://localhost:${process.env.PORT || 1001}`;
+        const downloadUrl = `${baseUrl}/temp-pdfs/${fileName}`;
+
+        // Schedule file cleanup after 10 minutes
+        setTimeout(() => {
+            try {
+                if (fs.existsSync(filePath)) {
+                    fs.unlinkSync(filePath);
+                    console.log(`Cleaned up temporary file: ${fileName}`);
+                }
+            } catch (error) {
+                console.error(`Error cleaning up file ${fileName}:`, error);
+            }
+        }, 10 * 60 * 1000); // 10 minutes
+
+        // Return file URL instead of sending PDF directly
+        res.status(200).json({
+            success: true,
+            downloadUrl: downloadUrl,
+            fileName: fileName,
+            message: 'Report generated successfully'
+        });
 
     } catch (error) {
         console.error("Get report error:", error);
