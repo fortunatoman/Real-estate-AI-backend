@@ -3,6 +3,7 @@ import querystring from 'querystring';
 import { searchZillow } from "./zillow";
 
 export const getZillow = async (userInput: string) => {
+    let results: any = null;
     const query = await extractSearchQuery(userInput);
 
     const searchQueryState = JSON.parse(query || '{}');
@@ -11,7 +12,7 @@ export const getZillow = async (userInput: string) => {
 
     const url = `https://www.zillow.com/homes/for_sale/LOCATION_rb/?searchQueryState=${encoded}`;
 
-    const results = await searchZillow(url);
+    results = await searchZillow(url);
 
     return results;
 }
